@@ -1,0 +1,171 @@
+/*
+
+AvgBracket:
+
+Finds the nearest values less-than and greater-than the average value in a list of numbers
+The Precision parameter specifies the number of decimals returned; defaults to 3 if omitted
+Outputs a string in the format (lbound, average, ubound)
+
+*/
+
+AvgBracket = LAMBDA(LookupArray, [Precision],
+
+LET(
+    Range, LookupArray,
+    avg, AVERAGE(Range),
+    decprec, IF(ISOMITTED(Precision), 3, Precision),
+    fmt, IF(decprec <> 0, CONCAT("0.", REPT("0", decprec - 1), "0"), "#"),
+    Least, MAX(FILTER(Range, Range < Avg)),
+    Most, MIN(FILTER(Range, Range > Avg)),
+    CONCAT("(", TEXTJOIN(" : ", , TEXT(least, fmt), TEXT(avg, fmt), TEXT(most, fmt)), ")"))
+);
+
+/*
+
+AvgBrak:
+
+Finds in the ReturnArray the nearest values less-than and greater-than the average value in the LookupArray of numbers
+E. g. finds the average value of LookupArray, and then finds the nearest value less-than that number and the nearest
+ value greater-than that number in the ReturnArray
+The Precision parameter specifies the number of decimals returned; defaults to 3 if omitted
+Outputs a string in the format (lbound, average, ubound); e. g. (0.861, 0.488, 0.203)
+
+*/
+
+AvgBrak = LAMBDA(LookupArray, ReturnArray, [Precision],
+
+LET(
+    Range, LookupArray,
+    Item, ReturnArray,
+    Avg, AVERAGE(Range),
+    DecPrec, IF(ISOMITTED(Precision), 3, Precision),
+    Fmt, IF(DecPrec <> 0, CONCAT("0.", REPT("0", DecPrec - 1), "0"), "#"),
+    Least, MAX(FILTER(Item, Item < Avg)),
+    Most, MIN(FILTER(Item, Item > Avg)),
+    CONCAT("(", TEXTJOIN(" : ", , TEXT(Least, Fmt), TEXT(Avg, Fmt), TEXT(Most, Fmt)), ")"))
+);
+
+/*
+
+AvgBracket_LO:
+
+Finds the nearest value less-than the average value in a list of numbers
+
+*/
+
+AvgBracket_LO = LAMBDA(LookupArray,
+
+LET(
+    Range, LookupArray,
+    avg, AVERAGE(Range),
+    Least, MAX(FILTER(Range, Range < Avg)),
+    Least
+    )
+);
+
+/*
+
+AvgBracket_HI:
+
+Finds the nearest value greater-than the average value in a list of numbers
+
+*/
+
+AvgBracket_HI = LAMBDA(LookupArray,
+
+LET(
+    Range, LookupArray,
+    avg, AVERAGE(Range),
+    Most, MIN(FILTER(Range, Range > Avg)),
+    Most
+    )
+);
+
+/*
+
+
+/*
+
+MedBracket:
+
+Finds the nearest values less-than and greater-than the median value in a list of numbers
+The Precision parameter specifies the number of decimals returned; defaults to 3 if omitted
+Outputs a string in the format (lbound, median, ubound)
+
+*/
+
+MedBracket = LAMBDA(LookupArray, [Precision],
+
+LET(
+    Range, LookupArray,
+    med, MEDIAN(Range),
+    decprec, IF(ISOMITTED(Precision), 3, Precision),
+    fmt, IF(decprec <> 0, CONCAT("0.", REPT("0", decprec - 1), "0"), "#"),
+    least, MAX(FILTER(Range, Range < med)),
+    most, MIN(FILTER(Range, Range > med)),
+    CONCAT("(", TEXTJOIN(" : ", , TEXT(least, fmt), TEXT(med, fmt), TEXT(most, fmt)), ")")
+)    
+);
+
+/*
+
+MedBrak:
+
+Finds in the ReturnArray the nearest values less-than and greater-than the median value in the LookupArray of numbers
+E. g. finds the median value of LookupArray, and then finds the nearest value less-than that number and the nearest
+ value greater-than that number in the ReturnArray
+The Precision parameter specifies the number of decimals returned; defaults to 3 if omitted
+Outputs a string in the format (lbound, median, ubound); e. g. (0.861, 0.488, 0.203)
+
+*/
+
+MedBrak = LAMBDA(LookupArray, ReturnArray, [Precision],
+
+LET(
+    Range, LookupArray,
+    Item, ReturnArray,
+    Med, MEDIAN(Range),
+    DecPrec, IF(ISOMITTED(Precision), 3, Precision),
+    Fmt, IF(DecPrec <> 0, CONCAT("0.", REPT("0", DecPrec - 1), "0"), "#"),
+    Least, MAX(FILTER(Item, Item < Med)),
+    Most, MIN(FILTER(Item, Item > Med)),
+    CONCAT("(", TEXTJOIN(" : ", , TEXT(Least, Fmt), TEXT(Med, Fmt), TEXT(Most, Fmt)), ")"))
+);
+
+/*
+
+/*
+
+MedBracket_LO:
+
+Finds the nearest value less-than the average value in a list of numbers
+
+*/
+
+MedBracket_LO = LAMBDA(LookupArray,
+
+LET(
+    Range, LookupArray,
+    Med, Median(Range),
+    Least, MAX(FILTER(Range, Range < Med)),
+    Least
+    )
+);
+
+/*
+
+MedBracket_HI:
+
+Finds the nearest value greater-than the average value in a list of numbers
+
+*/
+
+MedBracket_HI = LAMBDA(LookupArray,
+
+LET(
+    Range, LookupArray,
+    Med, MEDIAN(Range),
+    Most, MIN(FILTER(Range, Range > Med)),
+    Most
+    )
+);
